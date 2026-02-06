@@ -1,0 +1,26 @@
+{
+  "name": "SoloDev - Freelancer Workspace",
+  "short_name": "SoloDev",
+  "description": "A modern workspace for freelancers and clients to connect and collaborate on projects",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "https://api.dicebear.com/7.x/shapes/png?seed=solodev&backgroundColor=6366f1",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://api.dicebear.com/7.x/shapes/png?seed=solodev&backgroundColor=6366f1",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
