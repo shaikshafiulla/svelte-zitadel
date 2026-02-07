@@ -9,6 +9,7 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
 ## PWA Features Enabled
 
 ### 1. **Service Worker**
+
 - **Location**: `src/service-worker.ts`
 - **Features**:
   - Offline-first caching strategy
@@ -18,6 +19,7 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
   - Graceful offline error handling
 
 ### 2. **Web App Manifest**
+
 - **Location**: `static/manifest.json`
 - **Includes**:
   - App name, short name, and description
@@ -29,6 +31,7 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
   - Screenshot metadata
 
 ### 3. **Meta Tags**
+
 - **Location**: `src/app.html`
 - **Configuration**:
   - Theme color for browser chrome
@@ -39,6 +42,7 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
   - Preconnect directives for performance
 
 ### 4. **Icons**
+
 - **192x192 icon**: For app home screen
 - **512x512 icon**: For splash screens
 - **Maskable variants**: Adaptive icons for Android 12+
@@ -47,12 +51,14 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
 ## Installation Methods
 
 ### Desktop (Chrome, Edge, Opera)
+
 1. Visit the site in a supported browser
 2. Click the "Install" button in the address bar
 3. Click "Install" in the dialog
 4. App will appear on your desktop
 
 ### Mobile (Android)
+
 1. Open the site in Chrome
 2. Tap the menu (⋮)
 3. Select "Install app" or "Add to Home screen"
@@ -60,6 +66,7 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
 5. App will appear on your home screen
 
 ### Mobile (iOS)
+
 1. Open the site in Safari
 2. Tap the Share button
 3. Select "Add to Home Screen"
@@ -71,7 +78,7 @@ A Progressive Web App (PWA) is a web application that uses modern web capabiliti
 The service worker implements a network-first strategy:
 
 1. **Static Assets**: Always served from cache if available
-2. **Dynamic Content**: 
+2. **Dynamic Content**:
    - Tries network first
    - Falls back to cached version if offline
    - Shows offline message if neither available
@@ -98,10 +105,10 @@ Request → Network → Success?
 
 ```json
 {
-  "display": "standalone",      // Full-screen, app-like experience
+  "display": "standalone", // Full-screen, app-like experience
   "orientation": "portrait-primary", // Lock to portrait orientation
   "background_color": "#ffffff", // Splash screen background
-  "theme_color": "#6366f1",     // Browser chrome color
+  "theme_color": "#6366f1", // Browser chrome color
   "categories": ["business", "productivity"]
 }
 ```
@@ -114,17 +121,18 @@ Request → Network → Success?
 
 ## Browser Support
 
-| Browser | Desktop | Mobile | Version |
-|---------|---------|--------|---------|
-| Chrome | ✅ | ✅ | 40+ |
-| Edge | ✅ | ✅ | 79+ |
-| Firefox | ✅ | ⚠️ Limited | 92+ |
-| Safari | ❌ | ⚠️ Limited | 14+ (iOS 14.4+) |
-| Opera | ✅ | ✅ | 27+ |
+| Browser | Desktop | Mobile     | Version         |
+| ------- | ------- | ---------- | --------------- |
+| Chrome  | ✅      | ✅         | 40+             |
+| Edge    | ✅      | ✅         | 79+             |
+| Firefox | ✅      | ⚠️ Limited | 92+             |
+| Safari  | ❌      | ⚠️ Limited | 14+ (iOS 14.4+) |
+| Opera   | ✅      | ✅         | 27+             |
 
 ## Testing the PWA
 
 ### Lighthouse Audit
+
 ```bash
 # In Chrome DevTools
 1. Open DevTools (F12)
@@ -134,6 +142,7 @@ Request → Network → Success?
 ```
 
 ### Service Worker Testing
+
 ```bash
 1. Open DevTools → Application tab
 2. Click "Service Workers"
@@ -142,6 +151,7 @@ Request → Network → Success?
 ```
 
 ### Offline Testing
+
 ```bash
 1. Open DevTools → Network tab
 2. Enable "Offline" checkbox
@@ -187,17 +197,20 @@ Potential PWA features to add:
 ## Troubleshooting
 
 ### App not installable
+
 - Check: HTTPS enabled (required)
 - Check: Manifest is valid JSON
 - Check: Icons are accessible and correct size
 - Check: Service worker is registered
 
 ### Service worker not updating
+
 - Clear browser cache: Settings → Clear browsing data
 - Uninstall and reinstall app
 - Hard refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
 
 ### Offline not working
+
 - Check: Service worker is "activated and running"
 - Check: Browse to different route to test caching
 - Check: Check DevTools Console for errors

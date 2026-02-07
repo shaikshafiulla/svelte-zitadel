@@ -119,49 +119,55 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--bg-primary);
   }
 
   .navbar {
     height: 64px;
-    background: var(--bg-primary);
+    background: var(--card-bg);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: var(--card-shadow);
   }
 
   .nav-content {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 1.5rem;
-    gap: 2rem;
+    justify-content: space-between;
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-lg);
   }
 
   .logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-weight: 800;
+    gap: var(--spacing-sm);
+    font-weight: 700;
     font-size: 1.25rem;
     color: var(--accent);
+    flex-shrink: 0;
   }
 
   .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: var(--spacing-xl);
     flex: 1;
+    align-items: center;
   }
 
   .nav-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
     font-weight: 500;
     color: var(--text-secondary);
-    transition: color 0.2s;
+    transition: color 0.2s ease;
+    white-space: nowrap;
   }
 
   .nav-link:hover {
@@ -171,14 +177,15 @@
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--spacing-md);
+    flex-shrink: 0;
   }
 
   .user-badge {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.25rem 0.5rem;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
     border: 1px solid var(--border);
     border-radius: 20px;
     background: var(--bg-secondary);
@@ -187,6 +194,7 @@
   .user-name {
     font-size: 0.875rem;
     font-weight: 600;
+    white-space: nowrap;
   }
 
   .role-tag {
@@ -196,30 +204,37 @@
     padding: 0.125rem 0.5rem;
     border-radius: 10px;
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 700;
   }
 
   .login-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
     background: var(--accent);
     color: white;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 0.875rem;
     font-weight: 600;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .login-btn:hover {
+    background: var(--accent-hover);
   }
 
   .logout-btn {
     display: flex;
     align-items: center;
-    padding: 0.5rem;
+    justify-content: center;
+    padding: var(--spacing-sm);
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text-secondary);
-    border-radius: 8px;
-    transition: all 0.2s;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
     cursor: pointer;
     font-family: inherit;
   }
@@ -233,51 +248,125 @@
   .install-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
     background: var(--accent);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: background-color 0.2s ease;
   }
 
   .install-btn:hover {
-    opacity: 0.9;
+    background: var(--accent-hover);
   }
 
   .theme-toggle {
     background: transparent;
-    border: none;
+    border: 1px solid var(--border);
     color: var(--text-secondary);
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: background 0.2s;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .theme-toggle:hover {
     background: var(--bg-secondary);
     color: var(--accent);
+    border-color: var(--accent);
   }
 
   .content {
     flex: 1;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    padding: 2rem 1.5rem;
+    padding: var(--spacing-lg) var(--spacing-md);
   }
 
-  @media (max-width: 640px) {
+  /* Tablet responsiveness */
+  @media (max-width: 1024px) {
     .nav-content {
-      gap: 1rem;
+      padding: 0 var(--spacing-md);
+      gap: var(--spacing-md);
     }
-    .logo span, .nav-link span {
+
+    .nav-links {
+      gap: var(--spacing-lg);
+    }
+
+    .user-name {
       display: none;
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .navbar {
+      height: 56px;
+    }
+
+    .nav-content {
+      padding: 0 var(--spacing-md);
+      gap: var(--spacing-sm);
+    }
+
+    .logo span {
+      display: none;
+    }
+
+    .nav-links {
+      gap: var(--spacing-md);
+      flex: 0;
+    }
+
+    .nav-link span {
+      display: none;
+    }
+
+    .user-badge {
+      display: none;
+    }
+
+    .nav-actions {
+      gap: var(--spacing-sm);
+    }
+
+    .content {
+      padding: var(--spacing-md);
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .navbar {
+      height: 56px;
+    }
+
+    .nav-content {
+      padding: 0 var(--spacing-sm);
+      gap: 0;
+    }
+
+    .nav-links {
+      gap: var(--spacing-md);
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-actions {
+      gap: var(--spacing-xs);
+    }
+
+    .content {
+      padding: var(--spacing-md) var(--spacing-sm);
     }
   }
 </style>

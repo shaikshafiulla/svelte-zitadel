@@ -36,9 +36,10 @@ export const load: PageServerLoad = async ({ locals, cookies, fetch }) => {
   // Temporary: Mock session for disabled auth
   const dashboardData = {};
   const session = {
-    userId: 'test-user',
-    name: 'Test User',
-    roles: ['CLIENT', 'FREELANCER']
+    userId: 'freelancer-user-001',
+    name: 'Alex Johnson',
+    email: 'alex@solodev.dev',
+    roles: ['FREELANCER', 'CLIENT']
   };
 
   // Load jobs data

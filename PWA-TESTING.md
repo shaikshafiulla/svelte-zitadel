@@ -7,11 +7,12 @@
 ✅ **Icons**: Generated (192x192, 512x512, maskable variants)  
 ✅ **Meta Tags**: Complete PWA support  
 ✅ **Build**: Optimized with Vercel adapter  
-✅ **Offline Support**: Network-first caching strategy  
+✅ **Offline Support**: Network-first caching strategy
 
 ## Desktop Installation (Chrome/Edge)
 
 ### Installation Steps
+
 1. Open the app: `npm run preview`
 2. Visit `http://localhost:4173`
 3. Click the **Install** button in the address bar
@@ -19,18 +20,21 @@
 5. App opens in a separate window (standalone mode)
 
 ### Verification Checklist
+
 - [ ] Install button appears in address bar
 - [ ] App launches without browser chrome
 - [ ] App appears in applications list
 - [ ] Theme color (#6366f1) shows in window title bar
 
 ### Uninstalling
+
 - Right-click app → "Remove from devices"
 - Or uninstall like any desktop application
 
 ## Mobile Installation (Android Chrome)
 
 ### Installation Steps
+
 1. Open Chrome on Android
 2. Visit the live app URL
 3. Tap **⋮** (menu) at top-right
@@ -39,6 +43,7 @@
 6. App icon appears on home screen
 
 ### Verification Checklist
+
 - [ ] Install prompt appears (not banner)
 - [ ] App icon shows on home screen
 - [ ] App launches full-screen
@@ -48,6 +53,7 @@
 ## Mobile Installation (iOS/Safari)
 
 ### Installation Steps
+
 1. Open Safari on iPhone/iPad
 2. Visit the app URL
 3. Tap **Share** button (↗️)
@@ -56,6 +62,7 @@
 6. App icon appears on home screen
 
 ### Verification Checklist
+
 - [ ] Share menu has "Add to Home Screen" option
 - [ ] App icon appears on home screen
 - [ ] App launches full-screen
@@ -67,6 +74,7 @@
 ### In DevTools (All Browsers)
 
 **Chrome/Edge:**
+
 1. Open DevTools (`F12`)
 2. Go to **Application** tab
 3. Click **Service Workers** in sidebar
@@ -76,21 +84,24 @@
    - Version: Current build number
 
 **Firefox:**
+
 1. Open DevTools (`F12`)
 2. Go to **Storage** tab
 3. Expand **Service Workers**
 4. Should show entry with status ✓
 
 ### Manual Service Worker Test
+
 ```javascript
 // Open Console and run:
-navigator.serviceWorker.controller
+navigator.serviceWorker.controller;
 // Should return ServiceWorkerContainer object
 ```
 
 ## Cache Storage Testing
 
 ### View Cached Assets
+
 1. DevTools → **Application** → **Cache Storage**
 2. Expand cache list (should see `cache-[version]`)
 3. Should contain:
@@ -101,17 +112,17 @@ navigator.serviceWorker.controller
    - Manifest.json
 
 ### Clear Cache (Useful for Updates)
+
 ```javascript
 // In Console:
-caches.keys().then(names => 
-  names.forEach(name => caches.delete(name))
-);
+caches.keys().then((names) => names.forEach((name) => caches.delete(name)));
 // Then hard refresh: Ctrl+Shift+R
 ```
 
 ## Offline Functionality Testing
 
 ### Method 1: Offline Mode (Chrome DevTools)
+
 1. Open DevTools → **Network** tab
 2. Check **Offline** checkbox
 3. Reload page (`Ctrl+R`)
@@ -120,11 +131,13 @@ caches.keys().then(names =>
 6. Uncheck **Offline** to go back online
 
 ### Method 2: Throttle Network
+
 1. DevTools → **Network** tab
 2. Change throttle to "Slow 3G"
 3. Observe app handles slow network gracefully
 
 ### Method 3: Simulate Server Errors
+
 1. Go to a page and cache it (load normally)
 2. Stop the server (`npm run dev` → Ctrl+C)
 3. Navigate to different routes
@@ -134,6 +147,7 @@ caches.keys().then(names =>
 ## Lighthouse PWA Audit
 
 ### Running the Audit
+
 1. Open app in Chrome
 2. DevTools → **Lighthouse** tab
 3. Select **PWA** category only
@@ -141,7 +155,9 @@ caches.keys().then(names =>
 5. Wait for results (~2 min)
 
 ### Expected Results
+
 Should pass all PWA requirements:
+
 - ✓ Installable (Web App Manifest)
 - ✓ Service Worker (Offline support)
 - ✓ HTTPS ready (required for deployment)
@@ -149,7 +165,9 @@ Should pass all PWA requirements:
 - ✓ Splash screen support
 
 ### PWA Audits Per Page
+
 Run audit on:
+
 - `/` (home/dashboard)
 - `/profile/test-user` (profile)
 - Check each page loads offline
@@ -157,14 +175,17 @@ Run audit on:
 ## Manifest Validation
 
 ### Online Validators
+
 - [Web App Manifest Validator](https://manifest-validator.appspot.com/)
 - [PWA Builder](https://www.pwabuilder.com/)
 
 ### Manual Check
+
 1. DevTools → **Network** tab
 2. Filter: `manifest.json`
 3. Click manifest.json
 4. Check **Response** tab:
+
 ```json
 {
   "name": "SoloDev - Freelancer Workspace",
@@ -178,6 +199,7 @@ Run audit on:
 ## Icon Testing
 
 ### Icon Verification
+
 1. DevTools → **Application** → **Icons**
 2. Should show both icon variants:
    - `icon-192x192.png` (192×192)
@@ -186,12 +208,14 @@ Run audit on:
    - `icon-512x512-maskable.png` (with transparent area)
 
 ### Maskable Icon Test
+
 1. Install app on Android 12+ phone
 2. Go to app settings
 3. Long-press app icon
 4. Icon should fill entire circle (adaptive)
 
 ### Size Verification
+
 ```bash
 # Check icon dimensions
 identify static/icon-*.png
@@ -204,12 +228,14 @@ identify static/icon-*.png
 ## Network Test Scenarios
 
 ### Scenario 1: Normal Online Usage
+
 1. Start app normally
 2. Navigate between pages
 3. All data loads from network
 4. Cache updates in background
 
 ### Scenario 2: Go Offline Mid-Session
+
 1. Load dashboard online
 2. Enable Offline in DevTools
 3. Try navigating to profile
@@ -217,6 +243,7 @@ identify static/icon-*.png
 5. Show offline message (if not visited)
 
 ### Scenario 3: Intermittent Connection
+
 1. Enable "Slow 3G" throttling
 2. Navigate pages
 3. App should still be responsive
@@ -224,6 +251,7 @@ identify static/icon-*.png
 5. Cached content loads instantly
 
 ### Scenario 4: Return Online
+
 1. Browse with Offline enabled
 2. Disable Offline
 3. Refresh page
@@ -238,7 +266,7 @@ The app can optionally show a custom install prompt:
 // Listen for install prompt
 let deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', (e) => {
+window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
   showInstallButton(); // Show custom UI
@@ -255,6 +283,7 @@ This could be added to `src/routes/+layout.svelte` for custom UX.
 ## Performance Metrics
 
 ### Check Performance
+
 1. DevTools → **Performance** tab
 2. Click **Record**
 3. Reload page
@@ -266,6 +295,7 @@ This could be added to `src/routes/+layout.svelte` for custom UX.
    - **TTFB** (Time to First Byte): < 600ms
 
 ### Cached Load Performance
+
 1. Load page normally
 2. Note load time
 3. Go offline (DevTools)
@@ -282,6 +312,7 @@ Once deployed to Vercel:
 4. **Manifest**: Available at `/manifest.json`
 
 ### Test on Vercel
+
 ```bash
 # Install to Vercel-hosted app
 1. Visit your-app.vercel.app
@@ -292,23 +323,23 @@ Once deployed to Vercel:
 
 ## Common Issues & Solutions
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| No install button | HTTP or not manifest | Deploy to HTTPS (Vercel auto-enables) |
-| Service Worker won't register | Syntax error in SW | Check DevTools Console for errors |
-| Cache not updating | Version not changed | Hard refresh or clear cache |
-| Icons not showing | Wrong path in manifest | Check static/ folder exists |
-| Offline broken | SW fetch error | Test network strategy in DevTools |
-| App doesn't fullscreen | Display not "standalone" | Check manifest.json display property |
+| Issue                         | Cause                    | Solution                              |
+| ----------------------------- | ------------------------ | ------------------------------------- |
+| No install button             | HTTP or not manifest     | Deploy to HTTPS (Vercel auto-enables) |
+| Service Worker won't register | Syntax error in SW       | Check DevTools Console for errors     |
+| Cache not updating            | Version not changed      | Hard refresh or clear cache           |
+| Icons not showing             | Wrong path in manifest   | Check static/ folder exists           |
+| Offline broken                | SW fetch error           | Test network strategy in DevTools     |
+| App doesn't fullscreen        | Display not "standalone" | Check manifest.json display property  |
 
 ## Browser DevTools Shortcuts
 
-| Browser | Location | Shortcut |
-|---------|----------|----------|
-| Chrome | Application → Service Workers | F12 |
-| Edge | Application → Service Workers | F12 |
-| Firefox | Storage → Service Workers | F12 |
-| Safari | Develop → Service Workers | Cmd+Option+I |
+| Browser | Location                      | Shortcut     |
+| ------- | ----------------------------- | ------------ |
+| Chrome  | Application → Service Workers | F12          |
+| Edge    | Application → Service Workers | F12          |
+| Firefox | Storage → Service Workers     | F12          |
+| Safari  | Develop → Service Workers     | Cmd+Option+I |
 
 ## Testing Checklist (Complete)
 

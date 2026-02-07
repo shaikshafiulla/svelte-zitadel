@@ -3,6 +3,22 @@ import type { PageServerLoad } from './$types';
 
 // Dummy profiles data
 const dummyProfiles: { [key: string]: any } = {
+  'freelancer-user-001': {
+    id: 'freelancer-user-001',
+    name: 'Alex Johnson',
+    email: 'alex@solodev.dev',
+    role: 'FREELANCER',
+    bio: 'Full-stack developer with 5+ years of experience building modern web applications. Passionate about clean code and user-centered design.',
+    skills: ['SvelteKit', 'TypeScript', 'Node.js', 'React', 'Tailwind CSS', 'PostgreSQL', 'Docker'],
+    hourlyRate: 85,
+    completedProjects: 28,
+    rating: 4.9,
+    profileImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex-johnson',
+    location: 'San Francisco, CA',
+    availability: 'Available for new projects',
+    languages: ['English', 'Spanish'],
+    certifications: ['AWS Solutions Architect', 'Google Cloud Certified']
+  },
   'test-user': {
     id: 'test-user',
     name: 'Test User',
