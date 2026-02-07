@@ -1,0 +1,24 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" fill="#ffffff"/>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Briefcase shape -->
+  <rect x="48" y="60" width="96" height="80" rx="8" fill="url(#grad)"/>
+  <rect x="48" y="60" width="96" height="16" rx="8" fill="#4f46e5"/>
+  
+  <!-- Handle -->
+  <path d="M 72 60 Q 72 40 96 40 Q 120 40 120 60" stroke="#6366f1" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- Separator line -->
+  <line x1="48" y1="90" x2="144" y2="90" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Briefcase details -->
+  <circle cx="72" cy="115" r="4" fill="#ffffff" opacity="0.7"/>
+  <circle cx="96" cy="115" r="4" fill="#ffffff" opacity="0.7"/>
+  <circle cx="120" cy="115" r="4" fill="#ffffff" opacity="0.7"/>
+</svg>

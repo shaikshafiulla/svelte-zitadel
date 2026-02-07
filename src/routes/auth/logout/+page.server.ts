@@ -1,6 +1,7 @@
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
+/* ZITADEL AUTH DISABLED
 const ZITADEL_ISSUER = process.env.ZITADEL_ISSUER || 'http://localhost:8080';
 const POST_LOGOUT_REDIRECT_URI = process.env.ZITADEL_POST_LOGOUT_REDIRECT_URI || 'http://localhost:5173/';
 
@@ -56,3 +57,16 @@ function performLogout(cookies: any): string {
   // Fallback if no id_token (shouldn't happen in normal flow)
   return '/auth/login';
 }
+*/
+
+// Temporary: Simple logout redirect
+export const load: PageServerLoad = async () => {
+  throw redirect(302, '/');
+};
+
+// Add default action to prevent 405 error
+export const actions: Actions = {
+  default: async () => {
+    throw redirect(302, '/');
+  }
+};

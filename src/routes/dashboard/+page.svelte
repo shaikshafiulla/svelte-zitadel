@@ -1,27 +1,36 @@
 <script lang="ts">
-  import { Plus, Briefcase, Search as SearchIcon } from 'lucide-svelte';
-  import { page } from '$app/state';
-  import { enhance } from '$app/forms';
-  import JobCard from '$lib/components/jobs/JobCard.svelte';
-  import JobList from '$lib/components/jobs/JobList.svelte';
-  import JobForm from '$lib/components/jobs/JobForm.svelte';
-  import Card from '$lib/components/ui/Card.svelte';
+  import { Plus, Briefcase, Search as SearchIcon, Shield } from "lucide-svelte";
+  import { page } from "$app/state";
+  import { enhance } from "$app/forms";
+  import JobCard from "$lib/components/jobs/JobCard.svelte";
+  import JobList from "$lib/components/jobs/JobList.svelte";
+  import JobForm from "$lib/components/jobs/JobForm.svelte";
+  import Card from "$lib/components/ui/Card.svelte";
 
   let { data, form } = $props();
 
   let session = $derived(page.data.session);
-  let isFreelancer = $derived(session?.roles?.includes('FREELANCER'));
-  let isClient = $derived(session?.roles?.includes('CLIENT'));
+  let currentRole = $state(session?.roles?.[0] || "FREELANCER");
+  let isFreelancer = $derived(currentRole === "FREELANCER");
+  let isClient = $derived(currentRole === "CLIENT");
 
   let showJobForm = $state(false);
-  let searchQuery = $state('');
+  let searchQuery = $state("");
+
+  function toggleRole() {
+    currentRole = currentRole === "FREELANCER" ? "CLIENT" : "FREELANCER";
+    showJobForm = false;
+  }
 
   let filteredJobs = $derived(
-    data.jobs.filter((job: any) =>
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.skills.some((skill: string) => skill.toLowerCase().includes(searchQuery.toLowerCase()))
-    )
+    data.jobs.filter(
+      (job: any) =>
+        job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.skills.some((skill: string) =>
+          skill.toLowerCase().includes(searchQuery.toLowerCase()),
+        ),
+    ),
   );
 </script>
 
@@ -39,6 +48,16 @@
         {/if}
       </p>
     </div>
+
+    <div class="role-selector">
+      <div class="role-badge {currentRole.toLowerCase()}">
+        <Shield size={16} />
+        {currentRole}
+      </div>
+      <button class="toggle-btn" onclick={toggleRole} title="Toggle role">
+        Switch to {currentRole === "FREELANCER" ? "CLIENT" : "FREELANCER"}
+      </button>
+    </div>
   </header>
 
   {#if form?.success}
@@ -55,7 +74,7 @@
       <div class="section-header">
         <h2>My Posted Jobs</h2>
         {#if !showJobForm}
-          <button class="btn-primary" onclick={() => showJobForm = true}>
+          <button class="btn-primary" onclick={() => (showJobForm = true)}>
             <Plus size={18} />
             Post New Job
           </button>
@@ -65,7 +84,7 @@
       {#if showJobForm}
         <JobForm
           categories={data.jobCategories}
-          onCancel={() => showJobForm = false}
+          onCancel={() => (showJobForm = false)}
         />
       {:else}
         <JobList
@@ -77,7 +96,10 @@
 
     <div class="section">
       <h2>All Available Jobs</h2>
-      <JobList jobs={data.jobs} emptyMessage="No jobs available at the moment." />
+      <JobList
+        jobs={data.jobs}
+        emptyMessage="No jobs available at the moment."
+      />
     </div>
   {/if}
 
@@ -115,25 +137,25 @@
         <div class="stats-grid">
           <Card class="stat-card">
             <div class="stat-content">
-              <div class="stat-value">{dashboard.user.totalEarnings}</div>
+              <div class="stat-value">$2,450</div>
               <div class="stat-label">Total Earnings</div>
             </div>
           </Card>
           <Card class="stat-card">
             <div class="stat-content">
-              <div class="stat-value">{dashboard.stats.activeProjectsCount}</div>
+              <div class="stat-value">3</div>
               <div class="stat-label">Active Projects</div>
             </div>
           </Card>
           <Card class="stat-card">
             <div class="stat-content">
-              <div class="stat-value">{dashboard.stats.completedProjectsCount}</div>
+              <div class="stat-value">12</div>
               <div class="stat-label">Completed</div>
             </div>
           </Card>
           <Card class="stat-card">
             <div class="stat-content">
-              <div class="stat-value">{dashboard.stats.averageCompletion}%</div>
+              <div class="stat-value">95%</div>
               <div class="stat-label">Avg. Completion</div>
             </div>
           </Card>
@@ -168,6 +190,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 2rem;
   }
 
   .workspace-header h1 {
@@ -178,6 +201,56 @@
   .subtitle {
     color: var(--text-secondary);
     font-size: 0.9375rem;
+  }
+
+  .role-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    min-width: 200px;
+  }
+
+  .role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .role-badge.freelancer {
+    background: #dbeafe;
+    color: #0c4a6e;
+  }
+
+  .role-badge.client {
+    background: #fce7f3;
+    color: #831843;
+  }
+
+  .toggle-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .toggle-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
   }
 
   .section {
@@ -287,6 +360,15 @@
   }
 
   @media (max-width: 768px) {
+    .workspace-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .role-selector {
+      min-width: 100%;
+    }
+
     .search-box {
       min-width: 100%;
     }

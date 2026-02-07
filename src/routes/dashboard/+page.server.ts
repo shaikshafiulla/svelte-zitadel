@@ -4,6 +4,7 @@ import { Job, JobStatus, JobCategory } from '../../core/domain/entities/Job';
 import type { Cradle } from '../../core/infrastructure/di/container';
 
 export const load: PageServerLoad = async ({ locals, cookies, fetch }) => {
+  /* ZITADEL AUTH DISABLED
   const sessionCookie = cookies.get('session');
   if (!sessionCookie) {
     throw redirect(302, '/auth/login');
@@ -31,6 +32,14 @@ export const load: PageServerLoad = async ({ locals, cookies, fetch }) => {
   }
 
   const dashboardData = await response.json();
+  */
+  // Temporary: Mock session for disabled auth
+  const dashboardData = {};
+  const session = {
+    userId: 'test-user',
+    name: 'Test User',
+    roles: ['CLIENT', 'FREELANCER']
+  };
 
   // Load jobs data
   const container = (locals as any).container as { resolve: <T extends keyof Cradle>(key: T) => Cradle[T] };
@@ -67,12 +76,20 @@ export const load: PageServerLoad = async ({ locals, cookies, fetch }) => {
 
 export const actions: Actions = {
   postJob: async ({ request, locals, cookies }) => {
+    /* ZITADEL AUTH DISABLED
     const sessionCookie = cookies.get('session');
     if (!sessionCookie) {
       return fail(401, { message: 'Not authenticated' });
     }
 
     const session = JSON.parse(sessionCookie);
+    */
+    // Temporary: Mock session
+    const session = {
+      userId: 'test-user',
+      name: 'Test User',
+      roles: ['CLIENT', 'FREELANCER']
+    };
     const isClient = session.roles?.includes('CLIENT');
 
     if (!isClient) {
@@ -111,12 +128,20 @@ export const actions: Actions = {
   },
 
   applyForJob: async ({ request, locals, cookies }) => {
+    /* ZITADEL AUTH DISABLED
     const sessionCookie = cookies.get('session');
     if (!sessionCookie) {
       return fail(401, { message: 'Not authenticated' });
     }
 
     const session = JSON.parse(sessionCookie);
+    */
+    // Temporary: Mock session
+    const session = {
+      userId: 'test-user',
+      name: 'Test User',
+      roles: ['CLIENT', 'FREELANCER']
+    };
     const isFreelancer = session.roles?.includes('FREELANCER');
 
     if (!isFreelancer) {

@@ -2,6 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Cradle } from '../../../core/infrastructure/di/container';
 
+/* ZITADEL AUTH DISABLED
 export const load: PageServerLoad = async ({ url, locals, cookies }) => {
   const code = url.searchParams.get('code');
   if (!code) throw redirect(302, '/');
@@ -24,5 +25,11 @@ export const load: PageServerLoad = async ({ url, locals, cookies }) => {
     console.error('Auth Callback Error:', err);
   }
 
+  throw redirect(302, '/dashboard');
+};
+*/
+
+// Temporary: Bypass callback
+export const load: PageServerLoad = async () => {
   throw redirect(302, '/dashboard');
 };
